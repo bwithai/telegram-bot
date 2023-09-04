@@ -1,4 +1,5 @@
-import constants
+import os
+
 from telegram import Update
 from telegram.ext import (
     ApplicationBuilder,
@@ -13,6 +14,10 @@ from cmd.signals import send_signals
 from cmd.start_help import start_callback
 from cmd.test import get_chat_id, hello
 from utils import schedule_the_job_to_check_subscription
+from dotenv import load_dotenv
+load_dotenv()
+
+bot_token = os.environ["BOT_TOKEN"]
 
 schedule_the_job_to_check_subscription()
 
@@ -20,7 +25,7 @@ schedule_the_job_to_check_subscription()
 def main():
     print("Starting the bot application")
 
-    app = ApplicationBuilder().token(constants.BOT_TOKEN).build()
+    app = ApplicationBuilder().token(bot_token).build()
     print("Adding command handler")
     app.add_handler(CommandHandler("start", start_callback))
     app.add_handler(CommandHandler("help", start_callback))

@@ -1,9 +1,12 @@
+import os
+
 from telegram import LabeledPrice, Update
 from telegram.ext import ContextTypes
-import constants
 from database.crud import create_payment_record
+from dotenv import load_dotenv
+load_dotenv()
 
-PAYMENT_PROVIDER_TOKEN = constants.STRIP_TEST_TOKEN
+PAYMENT_PROVIDER_TOKEN = os.environ["STRIP_TEST_TOKEN"]
 
 
 async def create_invoice(
